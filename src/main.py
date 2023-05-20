@@ -4,7 +4,7 @@ import sentry_sdk
 from sentry_sdk.integrations.logging import LoggingIntegration
 
 from bot.application import start_bot
-from core.config import settings
+from config.config import settings
 
 # Logging бота активируется при инициализации logger в main.py
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)

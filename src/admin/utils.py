@@ -5,7 +5,7 @@ from sqlalchemy.orm.attributes import InstrumentedAttribute
 
 from src.core.db.model import Staff
 
-from .config import Config
+from ..config.config import settings
 from .locales import FIELD_TRANSLATION_RU
 from .logger import get_logger
 from .messages import TOKEN_VALIDATION_ERROR
@@ -45,17 +45,17 @@ def get_table_fields_from_model(model):
     return fields
 
 
-def get_reset_password_token(user, expires_in=int(Config.PASSWORD_RESET_TOKEN_TTL)):
+def get_reset_password_token(user, expires_in=int(settings.PASSWORD_RESET_TOKEN_TTL)):
     return jwt.encode(
         {"reset_password": user.login, "exp": time() + expires_in},
-        Config.SECRET_KEY,
-        algorithm=Config.PASSWORD_RESET_TOKEN_ALGORITHM,
+        settings.ADMIN_SECRET_KEY,
+        algorithm=settings.PASSWORD_RESET_TOKEN_ALGORITHM,
     )
 
 
 def verify_reset_password_token(token):
     try:
-        login = jwt.decode(token, key=Config.SECRET_KEY, algorithms=Config.PASSWORD_RESET_TOKEN_ALGORITHM)[
+        login = jwt.decode(token, key=settings.ADMIN_SECRET_KEY, algorithms=settings.PASSWORD_RESET_TOKEN_ALGORITHM)[
             "reset_password"
         ]
     except Exception as e:

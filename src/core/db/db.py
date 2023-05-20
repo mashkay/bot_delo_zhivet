@@ -3,10 +3,12 @@ import uuid
 from sqlalchemy import TIMESTAMP, Column, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import declarative_base, declared_attr, scoped_session, sessionmaker
+from sqlalchemy.orm import (
+    declarative_base, declared_attr, scoped_session, sessionmaker,
+)
 from sqlalchemy.pool import NullPool
 
-from src.core.config import settings
+from config.config import settings
 
 
 class PreBase:

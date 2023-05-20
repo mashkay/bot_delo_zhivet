@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from structlog import get_logger
 
-from core.config import settings
+from config.config import settings
 
 logger = get_logger(settings.logger_name)
 

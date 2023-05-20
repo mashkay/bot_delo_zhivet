@@ -4,12 +4,12 @@ from celery import Celery
 from telegram import Update
 from telegram.ext import ContextTypes
 
+from config.config import settings
 from src.bot.handlers.common import end_describing
 from src.bot.handlers.pollution import save_and_exit_pollution
 from src.bot.handlers.social import save_and_exit_from_social_problem
 from src.bot.handlers.state_constants import FEATURES, START_OVER
 from src.bot.handlers.volunteer import save_and_exit_volunteer
-from src.core.config import settings
 
 celery_result_backend = settings.celery_connect_string.format(
     host := settings.redis_host,

@@ -5,8 +5,8 @@ from PIL import Image
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from config.config import settings
 from src.bot.const import QUALITY, TARGET_WIDTH
-from src.core.config import settings
 from src.core.db.repository.pollution_repository import crud_pollution
 
 

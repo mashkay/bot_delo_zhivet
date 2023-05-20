@@ -2,8 +2,10 @@ import os
 
 from dadata import Dadata
 
-token = os.environ["DADATA_TOKEN"]
-secret = os.environ["DADATA_SECRET"]
+from src.config.config import settings
+
+token = settings.DADATA_TOKEN
+secret = settings.DADATA_SECRET
 dadata = Dadata(token, secret)
 
 

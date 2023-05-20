@@ -6,9 +6,11 @@ from typing import TextIO
 import structlog
 from structlog import PrintLogger
 from structlog.contextvars import merge_contextvars
-from structlog.processors import JSONRenderer, TimeStamper, UnicodeDecoder, add_log_level
+from structlog.processors import (
+    JSONRenderer, TimeStamper, UnicodeDecoder, add_log_level,
+)
 
-from core.config import settings
+from config.config import settings
 
 DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 

@@ -7,38 +7,25 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.ext import ContextTypes
 
+from config.config import settings
 from src.api.tracker import client
 from src.bot.const import KB_IN_MB, MAXIMUM_SIZE_OF_IMAGE_KB
-from src.bot.service.pollution import create_new_pollution, download_to_object_storage, resize_downloaded_image
+from src.bot.service.pollution import (
+    create_new_pollution, download_to_object_storage, resize_downloaded_image,
+)
 from src.bot.service.save_new_user import check_user_in_db, create_new_user
 from src.bot.service.save_tracker_id import save_tracker_id
 from src.bot.service.volunteer import volunteers_description
-from src.core.config import settings
 from src.core.db.db import get_async_session
 from src.core.db.repository.pollution_repository import crud_pollution
 from src.core.db.repository.volunteer_repository import crud_volunteer
 
 from .start import start
 from .state_constants import (
-    BACK,
-    CHECK_MARK,
-    CURRENT_FEATURE,
-    END,
-    FEATURES,
-    GEOM,
-    LATITUDE,
-    LONGITUDE,
-    POLLUTION,
-    POLLUTION_COMMENT,
-    POLLUTION_COORDINATES,
-    POLLUTION_FOTO,
-    SAVE,
-    SECOND_LEVEL_TEXT,
-    SELECTING_FEATURE,
-    START_OVER,
-    TELEGRAM_ID,
-    TELEGRAM_USERNAME,
-    TYPING,
+    BACK, CHECK_MARK, CURRENT_FEATURE, END, FEATURES, GEOM, LATITUDE,
+    LONGITUDE, POLLUTION, POLLUTION_COMMENT, POLLUTION_COORDINATES,
+    POLLUTION_FOTO, SAVE, SECOND_LEVEL_TEXT, SELECTING_FEATURE, START_OVER,
+    TELEGRAM_ID, TELEGRAM_USERNAME, TYPING,
 )
 
 

@@ -5,10 +5,15 @@ import sentry_sdk
 from flask import Flask, current_app, redirect, render_template, url_for
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-from .config import Config
-from .database import create_roles_and_superuser, db, get_not_existing_required_tables
+from ..config.config import settings
+from .database import (
+    create_roles_and_superuser, db, get_not_existing_required_tables,
+)
 from .logger import get_logger
-from .messages import DB_NOT_READY_FOR_INIT_APP_ERROR, MISSING_REQUIRED_TABLES_ERROR, START_LOGGING, STOP_LOGGING
+from .messages import (
+    DB_NOT_READY_FOR_INIT_APP_ERROR, MISSING_REQUIRED_TABLES_ERROR,
+    START_LOGGING, STOP_LOGGING,
+)
 
 logger = get_logger(__file__)
 logger.info(START_LOGGING)
@@ -30,7 +35,7 @@ if not_existing_tables:
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(settings)
     app.static_folder = os.path.join(app.root_path, "static")
     app.template_folder = os.path.join(app.root_path, "templates")
     app.static_url_path = None
@@ -40,9 +45,9 @@ def create_app():
     return app
 
 
-if Config.SENTRY_DSN_ADMIN:
+if settings.SENTRY_DSN_ADMIN:
     sentry_sdk.init(
-        dsn=Config.SENTRY_DSN_ADMIN,
+        dsn=settings.SENTRY_DSN_ADMIN,
         integrations=[
             FlaskIntegration(),
         ],

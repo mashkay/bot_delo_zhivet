@@ -1,34 +1,13 @@
-from dotenv import load_dotenv
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.ext import ContextTypes
 
-from api.tracker import client
 from bot.handlers.state_constants import (
-    ADDRESS_TEMPORARY,
-    BACK,
-    CHECK_MARK,
-    CITY,
-    CITY_INPUT,
-    CITY_SOCIAL,
-    CURRENT_FEATURE,
-    END,
-    FEATURES,
-    GEOM,
-    LATITUDE,
-    LONGITUDE,
-    SAVE,
-    SECOND_LEVEL_TEXT,
-    SELECTING_FEATURE,
-    SOCIAL,
-    SOCIAL_ADDRESS,
-    SOCIAL_COMMENT,
-    SOCIAL_PROBLEM_ADDRESS,
-    SOCIAL_PROBLEM_TYPING,
-    START_OVER,
-    TELEGRAM_ID,
-    TELEGRAM_USERNAME,
-    TYPING_SOCIAL_CITY,
+    ADDRESS_TEMPORARY, BACK, CHECK_MARK, CITY, CITY_INPUT, CITY_SOCIAL,
+    CURRENT_FEATURE, END, FEATURES, GEOM, LATITUDE, LONGITUDE, SAVE,
+    SECOND_LEVEL_TEXT, SELECTING_FEATURE, SOCIAL, SOCIAL_ADDRESS,
+    SOCIAL_COMMENT, SOCIAL_PROBLEM_ADDRESS, SOCIAL_PROBLEM_TYPING, START_OVER,
+    TELEGRAM_ID, TELEGRAM_USERNAME, TYPING_SOCIAL_CITY,
 )
 from bot.service.dadata import get_fields_from_dadata
 from src.bot.service.assistance_disabled import create_new_social
@@ -36,10 +15,12 @@ from src.bot.service.save_new_user import check_user_in_db, create_new_user
 from src.bot.service.save_tracker_id import save_tracker_id
 from src.bot.service.volunteer import volunteers_description
 from src.core.db.db import get_async_session
-from src.core.db.repository.assistance_disabled_repository import crud_assistance_disabled
+from src.core.db.repository.assistance_disabled_repository import (
+    crud_assistance_disabled,
+)
 from src.core.db.repository.volunteer_repository import crud_volunteer
 
-load_dotenv(".env")
+from api.tracker import client
 
 
 async def input_social_data(update: Update, context: ContextTypes.DEFAULT_TYPE):

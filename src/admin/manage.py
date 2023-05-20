@@ -5,19 +5,14 @@ import shutil
 import sys
 
 import flask_admin
-from config import Config
-from messages import (
-    APP_TEMPLATE_FOLDER_COPY_SUCCESS,
-    APP_TEMPLATE_FOLDER_NOT_FOUND,
-    COLLECT_STATIC_CLEAR_DIR_INFO,
-    COLLECT_STATIC_DIR_ALREADY_EXIST,
-    COLLECT_STATIC_ERROR,
-    COLLECT_STATIC_INFO,
-    COLLECT_TEMPLATES_ERROR,
-    COLLECT_TEMPLATES_SUCCESS,
-    COMMON_ERROR,
-    START_LOGGING,
-    STOP_LOGGING,
+
+from config.config import settings
+
+from .messages import (
+    APP_TEMPLATE_FOLDER_COPY_SUCCESS, APP_TEMPLATE_FOLDER_NOT_FOUND,
+    COLLECT_STATIC_CLEAR_DIR_INFO, COLLECT_STATIC_DIR_ALREADY_EXIST,
+    COLLECT_STATIC_ERROR, COLLECT_STATIC_INFO, COLLECT_TEMPLATES_ERROR,
+    COLLECT_TEMPLATES_SUCCESS, COMMON_ERROR, START_LOGGING, STOP_LOGGING,
     UNKNOWN_COMMAND,
 )
 
@@ -33,19 +28,19 @@ def get_logger(file, display=False):
 
     """Создание и настройка логгера."""
 
-    log_path = os.path.join(os.path.dirname(file), Config.LOG_REL_PATH)
+    log_path = os.path.join(os.path.dirname(file), settings.LOG_REL_PATH)
     if not os.path.exists(log_path):
         os.mkdir(log_path)
-    log_file = os.path.join(log_path, os.path.basename(file) + Config.LOG_EXTENSION)
+    log_file = os.path.join(log_path, os.path.basename(file) + settings.LOG_EXTENSION)
     logger = logging.getLogger(os.path.basename(file))
-    formatter = logging.Formatter(Config.LOG_FORMAT)
+    formatter = logging.Formatter(settings.LOG_FORMAT)
     file_handler = logging.FileHandler(log_file)
-    file_handler.setLevel(Config.LOG_DEFAULT_LVL)
+    file_handler.setLevel(settings.LOG_DEFAULT_LVL)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
     if display:
         console_handler = logging.StreamHandler(stream=sys.stdout)
-        console_handler.setLevel(Config.LOG_DEFAULT_LVL)
+        console_handler.setLevel(settings.LOG_DEFAULT_LVL)
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
     return logger
@@ -218,7 +213,7 @@ class Manage(object):
         merge = args.merge
         dst = os.path.join(os.path.dirname(os.path.abspath(__file__)), templates_folder)
         src_common = os.path.join(os.path.dirname(flask_admin.__file__), "templates")
-        src = os.path.join(src_common, Config.BOOTSTRAP_VERSION)
+        src = os.path.join(src_common, settings.BOOTSTRAP_VERSION)
         try:
             if not os.path.exists(dst):
                 os.mkdir(dst)

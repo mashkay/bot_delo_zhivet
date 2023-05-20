@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class Config(object):
+class settings(object):
     SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", default="SECRET_KEY")
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = (

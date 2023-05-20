@@ -9,29 +9,23 @@ from flask_mail import Mail, Message
 from flask_security import current_user
 from werkzeug.security import generate_password_hash
 
-from src.core.db.model import Assistance_disabled, Pollution, Staff, User, Volunteer
+from src.core.db.model import (
+    Assistance_disabled, Pollution, Staff, User, Volunteer,
+)
 
+from ..config.config import settings
 from . import app
-from .config import Config
 from .database import db
 from .forms import ForgotForm, LoginForm, PasswordResetForm, RegistrationForm
 from .logger import get_logger
 from .messages import (
-    ALREADY_REGISTRED,
-    BAD_TOKEN,
-    MAIL_SEND_ERROR,
-    MAIL_SEND_SUCCESS,
-    PASSWORD_CHANGED_SUCCESS,
-    RESET_PASSWORD_SUBJECT,
-    RESTORE_PASSWORD_SEND,
+    ALREADY_REGISTRED, BAD_TOKEN, MAIL_SEND_ERROR, MAIL_SEND_SUCCESS,
+    PASSWORD_CHANGED_SUCCESS, RESET_PASSWORD_SUBJECT, RESTORE_PASSWORD_SEND,
     SUGGEST_REGISTRATION,
 )
 from .utils import (
-    get_readonly_dict,
-    get_reset_password_token,
-    get_table_fields_from_model,
-    get_translated_lables,
-    verify_reset_password_token,
+    get_readonly_dict, get_reset_password_token, get_table_fields_from_model,
+    get_translated_lables, verify_reset_password_token,
 )
 
 logger = get_logger(__file__)
@@ -71,7 +65,7 @@ def send_password_reset_email(user):
     token = get_reset_password_token(user)
     send_email(
         RESET_PASSWORD_SUBJECT,
-        sender=Config.MAIL_USERNAME,
+        sender=settings.MAIL_USERNAME,
         recipients=[user.email],
         text_body=render_template("emails/reset_email.txt", user=user, token=token),
         html_body=render_template("emails/reset_email.html", user=user, token=token),
@@ -252,7 +246,7 @@ admin = flask_admin.Admin(
     "Бот «Дело живёт»",
     index_view=MyAdminIndexView(name="Главная"),
     base_template="my_master.html",
-    template_mode=Config.BOOTSTRAP_VERSION,
+    template_mode=settings.BOOTSTRAP_VERSION,
 )
 
 admin.add_view(StaffModelView(Staff, db.session, name="Администраторы"))

@@ -1,7 +1,7 @@
 import backoff
 from structlog import get_logger
 
-from core.config import settings
+from config.config import settings
 
 logger = get_logger(settings.logger_name)
 
