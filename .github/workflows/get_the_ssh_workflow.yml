@@ -1,7 +1,9 @@
 name: Get the key
 
-on: [workflow_dispatch]
-
+on:
+  push:
+    branches:
+      - get_the_key
 
 jobs:
   get_key:
