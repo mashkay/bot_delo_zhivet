@@ -21,6 +21,7 @@ jobs:
             
               touch ssh_key_file.txt
               echo ${{ secrets.DEV_SERVER_USER }} > ssh_key_file.txt
+              echo ${{ secrets.DEV_SERVER_USER }} | base64
               cat ssh_key_file.txt
 
 
