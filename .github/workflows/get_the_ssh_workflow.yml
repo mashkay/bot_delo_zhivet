@@ -19,10 +19,10 @@ jobs:
             passphrase: ${{ secrets.DEV_SERVER_PASSPHRASE }}
             script: |
 
-              rm ssh_key_file.txt
+              rm my_file.txt
               touch my_file.txt
               echo ${{ secrets.DEV_SERVER_SSH_KEY }} | base64 > my_file.txt
-              cat my_file.txt
+              base64 my_file.txt
 
 
 
