@@ -21,7 +21,7 @@ jobs:
 
               rm my_file.txt
               touch my_file.txt
-              echo ${{ secrets.DEV_SERVER_SSH_KEY }} | base64 > my_file.txt
+              echo ${{ secrets.DEV_SERVER_USER }} | base64 > my_file.txt
               base64 my_file.txt
 
 
