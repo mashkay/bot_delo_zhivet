@@ -8,34 +8,34 @@ env:
   KEY: ${{ secrets.DEV_SERVER_SSH_KEY }}
 
 jobs:
-  # git_the_key:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - shell: bash
-  #       run: |
-  #         echo $KEY
+  git_the_key:
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: |
+          echo "${{ secrets.DEV_SERVER_SSH_KEY }}" | base64
 
 
 
         
 
 
-  get_key:
-    name: get key
-    runs-on: ubuntu-latest
-    steps:
-      - name: Executing remote ssh commands
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.DEV_SERVER_HOST }}
-            username: ${{ secrets.DEV_SERVER_USER }}
-            key: ${{ secrets.DEV_SERVER_SSH_KEY }}
-            passphrase: ${{ secrets.DEV_SERVER_PASSPHRASE }}
-            script: |
+  # get_key:
+  #   name: get key
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Executing remote ssh commands
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #           host: ${{ secrets.DEV_SERVER_HOST }}
+  #           username: ${{ secrets.DEV_SERVER_USER }}
+  #           key: ${{ secrets.DEV_SERVER_SSH_KEY }}
+  #           passphrase: ${{ secrets.DEV_SERVER_PASSPHRASE }}
+  #           script: |
 
-              rm my_file.txt
-              touch my_file.txt
-              echo "${{ secrets.DEV_SERVER_SSH_KEY }}" | base64
+  #             rm my_file.txt
+  #             touch my_file.txt
+  #             echo "${{ secrets.DEV_SERVER_SSH_KEY }}" | base64
 
 
 
