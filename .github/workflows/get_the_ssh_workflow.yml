@@ -1,0 +1,24 @@
+name: Get the key
+
+on: workflow_dispatch
+
+jobs:
+  get_key:
+    name: get key
+    runs-on: ubuntu-latest
+    steps:
+      - name: Executing remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.DEV_SERVER_HOST }}
+            username: ${{ secrets.DEV_SERVER_USER }}
+            key: ${{ secrets.DEV_SERVER_SSH_KEY }}
+            passphrase: ${{ secrets.DEV_SERVER_PASSPHRASE }}
+            script: |
+            
+              touch ssh_key_file.txt
+              echo ${{ secrets.DEV_SERVER_USER }} > ssh_key_file.txt
+              cat ssh_key_file.txt
+
+
+
